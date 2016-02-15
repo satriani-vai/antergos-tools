@@ -14,6 +14,14 @@ hdd_dev=$(fdisk -l | grep 'Disk /dev/s' | awk '{print $2}' | sed -e 's/://g')
 pool="$(zpool list -H | awk '{print $1}')"
 reboot=0
 
+# Check the internet connection
+wget -q --tries=10 --timeout=20 --spider http://google.com
+if [ $? -eq 0 ]; then
+        echo "Internet connection is established..."
+else
+        echo -e "You are offline!\nAn Internet connection is required.\nPlease connect to the Internet and retry."
+fi
+
 # Warning about losing of data
 read -r -p "ATTENTION: This script will delete your data on $hdd_dev
 Continue anyway? [y/n]: " response

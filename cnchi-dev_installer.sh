@@ -43,12 +43,12 @@ Please download the latest build and try again, otherwise issues may occur durin
 Continue anyway? [y/n]: " response
   case $response in
     [yYjJsS])
-	  echo -e "Current build: ${current_build}\nNote: Issues may occur during installation!"
-	  ;;
-	*)
-	  echo "Please download the latest build here: http://build.antergos.com/browse/testing and try again."
-	  exit 0
-	  ;;
+      echo -e "Current build: ${current_build}\nNote: Issues may occur during installation!"
+      ;;
+    *)
+      echo "Please download the latest build here: http://build.antergos.com/browse/testing and try again."
+      exit 0
+      ;;
   esac
 else
   echo "Current build: ${current_build}"
@@ -76,16 +76,15 @@ if [ "$reboot" -eq 1 ]; then
   read -r -p "You must reboot, otherwise issues may occur. Performing a restart? [y/n]: " response
   case $response in
     [yYjJ])
-	  reboot
-	  ;;
-	*)
-	  echon "Will not restart!"
-	  ;;
+      reboot
+      ;;
+    *)
+      echo -e "Skip rebot...\nATTENTION: Issues may occur during installation!"
+      ;;
   esac
 fi
 
 # Clone and run Cnchi
-
 if [ -d Cnchi ]; then
   cd Cnchi
   if git checkout master &&

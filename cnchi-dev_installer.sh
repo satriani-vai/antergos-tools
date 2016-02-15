@@ -8,7 +8,6 @@ if [ $EUID -ne 0 ]; then
 fi
 
 doWork() {
-latest_build="$(wget -O- -q https://raw.githubusercontent.com/Antergos/antergos-iso/master/configs/antergos/root-image/etc/lsb-release | grep "DISTRIB_RELEASE=" | cut -d= -f2)"
 current_build="$(cat /etc/lsb-release | grep "DISTRIB_RELEASE=" | cut -d= -f2)"
 hdd_dev=$(fdisk -l | grep 'Disk /dev/s' | awk '{print $2}' | sed -e 's/://g')
 pool="$(zpool list -H | awk '{print $1}')"
@@ -37,6 +36,7 @@ case $response in
 esac
 
 # Check build for update
+latest_build="$(wget -O- -q https://raw.githubusercontent.com/Antergos/antergos-iso/master/configs/antergos/root-image/etc/lsb-release | grep "DISTRIB_RELEASE=" | cut -d= -f2)"
 if [ "$latest_build" != "$current_build" ]; then
   read -r -p "This is not a latest build!
 Please download the latest build and try again, otherwise issues may occur during installation.

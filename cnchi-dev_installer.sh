@@ -2,7 +2,7 @@
 DIR="$(pwd)"
 chmod +x $0
 (( EUID != 0 )) && exec sudo -- "./$0" "./$@"
-if [[ $EUID -ne 0 ]]; then
+if [ $EUID -ne 0 ]; then
   echo "You must have a root permissions" 2>&1
   exit 1
 fi
@@ -17,9 +17,10 @@ reboot=0
 # Check the internet connection
 wget -q --tries=10 --timeout=20 --spider http://google.com
 if [ $? -eq 0 ]; then
-        echo "Internet connection is established..."
+  echo "Internet connection is established..."
 else
-        echo -e "You are offline!\nAn Internet connection is required.\nPlease connect to the Internet and retry."
+  echo -e "You are offline!\nAn Internet connection is required.\nPlease connect to the Internet and retry."
+  exit 1
 fi
 
 # Warning about losing of data

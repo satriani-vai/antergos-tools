@@ -66,9 +66,9 @@ fi
 
 if [ "$(wipefs $hdd_dev)" ]; then
   echo "Wipe a flie system on \"$hdd_dev\""
-  wipefs -a $hdd_dev
+  wipefs -a $hdd_dev &
+  wait
   reboot=1
-  sleep 3
 else
   echo "No file system available"
 fi

@@ -14,9 +14,10 @@ pool="$(zpool list -H | awk '{print $1}')"
 reboot=0
 
 # Check the internet connection
-wget -q --tries=10 --timeout=20 --spider http://google.com &
+wget -q --tries=10 --timeout=20 --spider http://google.com
 if [ $? -eq 0 ]; then
-  echo "Internet connection is established..."
+  echo "Internet connection is established..." &
+  wait
 else
   echo -e "You are offline!\nAn Internet connection is required.\nPlease connect to the Internet and retry."
   exit 1
